@@ -28,6 +28,7 @@ if __name__ == "__main__":
     # Convert that to a DataFrame
     movieDataset = spark.createDataFrame(movies)
 
+    val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter", '|').load("ml-100k/u.item")
 
     # Stop the session
     spark.stop()
