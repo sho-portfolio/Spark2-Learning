@@ -33,5 +33,5 @@ sqlDF2 = spark.sql("SELECT mydataset2._c0 FROM mydataset2")
 sqlDF2.show()
 
 # JOIN ATTEMPT
-sqlDFJoin = spark.sql("SELECT mydataset2._c0 FROM mydataset2 INNER JOIN mydataset ON mydataset._c0 = mydataset2._c0")
+sqlDFJoin = spark.sql("SELECT * FROM mydataset2 INNER JOIN mydataset ON mydataset._c0 = mydataset2._c0 WHERE mydataset2._c0 < 10")
 sqlDFJoin.show()
