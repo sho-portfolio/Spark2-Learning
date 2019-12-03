@@ -17,7 +17,7 @@ schemaUser = StructType([
     StructField("date", LongType(), True)]
 )
 
-df = spark.read.format("csv").option("header", "false").option("schema", "schemaUser").load("ml-100k/u.data")
+df = spark.read.format("csv").option("header", "false").option("delimiter", "\t").option("schema", "schemaUser").load("ml-100k/u.data")
 
 
 df.show()
