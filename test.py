@@ -2,17 +2,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql import Row
 from pyspark.sql import functions
 
-def loadMovieNames():
-    movieNames = {}
-    with open("ml-100k/u.item") as f:
-        for line in f:
-            fields = line.split('|')
-            movieNames[int(fields[0])] = fields[1]
-    return movieNames
-
-def parseInput(line):
-    fields = line.split()
-    return Row(movieID = int(fields[1]), rating = float(fields[2]))
 
 if __name__ == "__main__":
     # Create a SparkSession (the config bit is only for Windows!)
@@ -28,12 +17,13 @@ if __name__ == "__main__":
     # Convert that to a DataFrame
     movieDataset = spark.createDataFrame(movies)
 
-    sc.textFile("ml-100k/u.data") \
-        .map(lambda line: line.split(",")) \
-        .filter(lambda line: len(line)>1) \
-        .map(lambda line: (line[0],line[1])) \
-        .collect()    
+    #sc.textFile("ml-100k/u.data") \
+    #    .map(lambda line: line.split(",")) \
+    #    .filter(lambda line: len(line)>1) \
+    #    .map(lambda line: (line[0],line[1])) \
+    #    .collect()    
 
+    df = spark.read.format("csv").option("header", "false").load("ml-100k/u.data")
 
     # Stop the session
     spark.stop()
