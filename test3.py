@@ -9,3 +9,11 @@ spark = SparkSession \
 df = spark.read.format("csv").option("header", "false").load("ml-100k/u.data")
 
 df.show()
+
+df.printSchema()
+
+
+df.createOrReplaceTempView("mydataset")
+sqlDF = spark.sql("SELECT * FROM mydataset")
+sqlDF.show()
+
