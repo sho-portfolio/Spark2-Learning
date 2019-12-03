@@ -9,9 +9,15 @@ spark = SparkSession \
     .config("spark.some.config.option", "some-value") \
     .getOrCreate()
 
-df = spark.read.format("csv").option("header", "false").load("ml-100k/u.data")
+from pyspark.sql.types import StructType, StructField, IntegerType
+schemaUser = StructType([
+    StructField("userId", IntegerType(), True),
+    StructField("movieId", IntegerType(), True),
+    StructField("rating", IntegerType(), True),
+    StructField("date", IntegerType(), True)]
+)
 
-
+df = spark.read.format("csv").option("header", "false").option("schema", "schemaUser").load("ml-100k/u.data")
 
 
 df.show()
