@@ -29,13 +29,5 @@ if __name__ == "__main__":
     movieDataset = spark.createDataFrame(movies)
 
 
-
-    #df = spark.read.format("csv").option("header", "false").load("ml-100k/u.item")
-    #val df = spark.sql("SELECT * FROM csv.`hdfs:///csv/file/dir/file.csv`")
-
-    val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter", '|').load("ml-100k/u.item")
-
-
-
     # Stop the session
     spark.stop()
