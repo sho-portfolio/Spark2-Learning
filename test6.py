@@ -20,5 +20,7 @@ df.createOrReplaceTempView("mydataset")
 sqlDF = spark.sql("SELECT * FROM mydataset")
 sqlDF.show()
 
-from pyspark.sql import sqlContext
-df2 = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter", '|').load("ml-100k/u.item")
+df2 = spark.read.format("csv").option("header", "false").option("delimiter", '|').load("ml-100k/u.item")
+
+
+df2.show()
