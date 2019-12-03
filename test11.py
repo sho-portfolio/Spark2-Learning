@@ -37,5 +37,5 @@ df2 = spark.read.format("csv").option("header", "false").option("delimiter", '|'
 df2.show()
 
 df2.createOrReplaceTempView("mydataset2")
-sqlDF2 = spark.sql("SELECT * FROM mydataset2")
+sqlDF2 = spark.sql("SELECT _c01 FROM mydataset2")
 sqlDF2.show()
